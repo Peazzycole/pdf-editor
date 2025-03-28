@@ -1,6 +1,12 @@
+import { Annotation } from "@/utils/types";
 import { useState } from "react";
 
-const CommentIcon = ({ annotation, index }) => {
+type Props = {
+    annotation: Annotation
+    index: number
+}
+
+const CommentIcon = ({ annotation, index }: Props) => {
     const [showBubble, setShowBubble] = useState(false);
 
     return (
@@ -8,8 +14,8 @@ const CommentIcon = ({ annotation, index }) => {
             key={`comment-icon-${index}`}
             className="absolute flex items-center justify-center w-6 h-6 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-600 transition transform hover:scale-110 cursor-pointer z-40"
             style={{
-                top: annotation.rects[0].top - 11,
-                left: annotation.rects[0].left - 10,
+                top: annotation.rects![0].top - 11,
+                left: annotation.rects![0].left - 10,
             }}
             onClick={() => setShowBubble(!showBubble)}
             onMouseEnter={() => setShowBubble(true)}
