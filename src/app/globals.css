@@ -1,26 +1,13 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased; /* Improves font rendering */
+    -moz-osx-font-smoothing: grayscale; /* Improves font rendering on macOS */
+    text-rendering: optimizeLegibility; /* Enhances text rendering for legibility */
+    font-smooth: always; /* Ensures smooth font rendering */
+}
+
+::selection {
+    background-color: red; 
+    color: white; /* Change the text color inside the selection */
 }
