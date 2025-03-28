@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect } from "react";
 import { Annotation } from "@/utils/types";
 import { v4 as uuidv4 } from "uuid";

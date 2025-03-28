@@ -1,3 +1,5 @@
+"use client"
+
 import { Loader } from 'lucide-react';
 import React, { useState } from 'react'
 import { Document, Page } from 'react-pdf';

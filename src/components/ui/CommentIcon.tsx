@@ -1,5 +1,9 @@
+"use client"
+
 import { Annotation } from "@/utils/types";
 import { useState } from "react";
+import { FaCommentAlt } from "react-icons/fa";
+
 
 type Props = {
     annotation: Annotation
@@ -12,30 +16,39 @@ const CommentIcon = ({ annotation, index }: Props) => {
     return (
         <div
             key={`comment-icon-${index}`}
-            className="absolute flex items-center justify-center w-6 h-6 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-600 transition transform hover:scale-110 cursor-pointer z-40"
+            className="absolute bg-transparent flex items-center justify-center w-6 h-6 text-white text-sm font-semibold rounded-full shadow-md transition transform hover:scale-110 cursor-pointer z-40"
             style={{
-                top: annotation.rects![0].top - 11,
+                top: annotation.rects![0].top - 13,
                 left: annotation.rects![0].left - 10,
             }}
             onClick={() => setShowBubble(!showBubble)}
             onMouseEnter={() => setShowBubble(true)}
             onMouseLeave={() => setShowBubble(false)}
         >
-            🗨️
+            <FaCommentAlt className="text-gray-500" />
 
             {/* Chat Bubble */}
             {showBubble && (
                 <div
-                    className="absolute bg-white text-gray-900 text-sm p-3 rounded-lg shadow-lg border border-gray-300 w-52"
+                    className="absolute text-gray-900 text-sm p-3 rounded-lg border border-gray-300 w-52 bg-white"
                     style={{
-                        top: "-45px", // Positioning above the icon
+                        top: "100%", // Positioning above the icon
                         left: "50%",
                         transform: "translateX(-50%)",
                         zIndex: 50,
                     }}
                 >
                     <div className="relative">
-                        <div className="">{annotation.comment || "No comment available."}</div>
+                        <p
+                            className="break-words"
+                            style={{
+                                wordWrap: "break-word",
+                                wordBreak: "break-word",
+                                whiteSpace: "normal",
+                            }}
+                        >
+                            {annotation.comment || "No comment available."}
+                        </p>
                     </div>
                 </div>
             )}

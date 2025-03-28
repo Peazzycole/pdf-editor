@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback } from "react";
 import { Annotation, Tooltip } from "@/utils/types";
 
@@ -18,7 +20,6 @@ export const useTextSelection = ({
     const handleTextSelection = useCallback(
         (event: React.MouseEvent) => {
             const selection = window.getSelection();
-            console.log(selection)
             if (selection && selection.rangeCount > 0) {
                 const range = selection.getRangeAt(0);
                 const pageElement = range.startContainer.parentElement?.closest(".react-pdf__Page");

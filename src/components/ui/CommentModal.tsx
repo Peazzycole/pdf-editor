@@ -1,3 +1,5 @@
+"use client"
+
 import { Annotation } from '@/utils/types';
 import React from 'react'
 

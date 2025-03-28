@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useCallback, useState } from "react";
 import { Annotation } from "@/utils/types";
-import { PDFDocument, rgb } from "pdf-lib";
+import { PDFArray, PDFDocument, PDFName, PDFString, rgb } from "pdf-lib";
 
 interface AppContextProps {
     annotations: Annotation[];
@@ -76,6 +76,36 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
                             thickness: 1.5,
                             color: rgb(color.r, color.g, color.b),
                         });
+                    } else if (annotation.type === "comment") {
+                        const iconSize = 20;
+                        const iconX = annotation.rects?.[0]?.left / scale || 50;
+                        const iconY = annotation.rects?.[0]
+                            ? page.getHeight() - ((annotation.rects[0].top + annotation.rects[0].height) / scale)
+                            : page.getHeight() - 50;
+
+                        // Create a text annotation with an icon.
+                        const textAnnot = pdfDoc.context.obj({
+                            Type: "Annot",
+                            Subtype: "Text",
+                            Rect: [iconX, iconY, iconX + iconSize, iconY + iconSize],
+                            Contents: PDFString.of(annotation.comment || "Comment"),
+                            // Use a standard icon name. Options include "Comment", "Key", "Note", etc.
+                            Name: "Comment",
+                            Open: false,
+                            T: "Reviewer",
+                        });
+
+                        const textAnnotRef = pdfDoc.context.register(textAnnot);
+
+                        // Get the existing Annots array, or create a new one if it doesn't exist
+                        let annots = page.node.get(PDFName.of("Annots"));
+                        if (!annots || !(annots instanceof PDFArray)) {
+                            annots = pdfDoc.context.obj([]);
+                            page.node.set(PDFName.of("Annots"), annots);
+                        }
+
+                        // Append the new annotation reference to the Annots array
+                        (annots as PDFArray).push(textAnnotRef);
                     }
                 }
             }
