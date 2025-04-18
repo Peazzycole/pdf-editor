@@ -2,6 +2,8 @@
 
 The Document Signer & Annotation Tool is a modern web application built with Next.js that allows users to upload, annotate, and export PDF documents seamlessly. Designed with a sleek and intuitive interface, this tool empowers users to highlight, underline, comment, and sign documents with ease. Whether you're reviewing contracts, collaborating on reports, or signing important files, this application provides all the tools you need in one place.
 
+**Live Demo:** https://pdf-editor-seven-pied.vercel.app/
+
 ### Key Features:
 - **PDF Upload**: Drag-and-drop or select files to upload and view PDFs instantly.
 - **Annotation Tools**: Highlight, underline, comment, and draw signatures directly on the document.
